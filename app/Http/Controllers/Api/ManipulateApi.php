@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
-use Illuminate\Queue\Events\Looping;
+use App\Http\Resources\ApiResponse;
 use Illuminate\Routing\Controller as BaseController;
 
 class ManipulateApi extends BaseController
 {
+
+
     public function dataManipulate()
     {
         //Get Data JSON From Public File
@@ -35,17 +36,11 @@ class ManipulateApi extends BaseController
                 $mergedData[] = $mergedEntry;
             }
         }
+
         //call fungsi sorting data
         $sortedData = $this->sortingData($mergedData);
 
-        //create response template
-        $outputDataResult = [
-            "status" => 1,
-            "message" => "OK",
-            "data" => $sortedData,
-        ];
-
-        return response()->json($outputDataResult);
+        return new ApiResponse(1, 'Data Successfully Retrieved.', $sortedData);
     }
 
     //Create Function Data Sorting small to large
