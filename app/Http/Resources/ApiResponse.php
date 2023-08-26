@@ -30,7 +30,7 @@ class ApiResponse extends JsonResource
     public function toArray($request)
     {
         return [
-            'success'   => $this->status,
+            'status'   => $this->status,
             'message'   => $this->message,
             'data'      => $this->resource
         ];
